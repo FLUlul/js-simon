@@ -18,10 +18,7 @@ creo un timer di 30 secondi
             stampo: non hai azzecchato neanche un numero :(
 */
 
-
-
 const numbersDiv = document.querySelector(".numbers");
-const numbersRight = document.querySelector(".right-numbers");
 
 /* here i generate the random numbers from 1 to 100 and assign a variable to it */
 let randomNumbers = createRandomNumbers(100);
@@ -31,7 +28,8 @@ numbersDiv.innerHTML += randomNumbers;
 
 /* here i set a timer of 30secs(30.000 ms)*/
 setTimeout(() => {
-    /* clear the html so i can't see the number anymore */
+    /* adding a display none to the random numbers container */
+    numbersDiv.classList.add("dnone");
     numbersDiv.innerHTML = "";
     /* ask the user to insert 5 numbers that he saw */
     let numb1 = parseInt(prompt("insert a number you saw"))
@@ -46,13 +44,12 @@ setTimeout(() => {
     /* here i make a cicle for each element of the user number array, if the random numbers includes the user numbers then i print those numbers */
     userNumbers.forEach((element) => {
         if(randomNumbers.includes(element)){
-            numbersRight.innerHTML += element + ", ";
-        }else{
-            numbersRight.innerHTML = "You aint got a single number :("
+            numbersDiv.classList.remove("dnone");
+            numbersDiv.innerHTML += element + ", ";
         }
     });
-
-}, 30000);
+    numbersDiv.classList.remove("dnone");
+}, 3000);
 
 /* function to get a random number not doubles */
 function createRandomNumbers(max) {
